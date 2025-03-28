@@ -320,6 +320,9 @@ class autoDEERUI(QMainWindow):
         elif spectrometer['Manufacturer'] == 'Dummy':
             model = 'Dummy'
         
+        elif spectrometer['Manufacturer'] == 'B12T':
+            model = 'B12T'
+        
         try:
             if model == 'Dummy':
                 from autodeer.hardware.dummy import dummyInterface
@@ -347,6 +350,13 @@ class autoDEERUI(QMainWindow):
                 self.spectromterInterface = BrukerAWG(filename_edit)
                 self.spectromterInterface.savefolder = self.current_folder
                 self.Bruker=True
+
+            elif model == "B12T":
+                from autodeer.hardware.B12T_epr import B12TInterface
+                self.spectromterInterface = B12TInterface(filename_edit)
+                self.spectromterInterface.savefolder = self.current_folder
+                self.Bruker=False
+                
         except ImportError:
             QMessageBox.about(self,'ERORR!', 
                               'The spectrometer interface could not be loaded!\n'+

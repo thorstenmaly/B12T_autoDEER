@@ -1071,6 +1071,7 @@ def calc_DEER_settings(relaxation_data,mode='auto', target_time=2,
         tau2_4p = tau_2_lb
         tau1_4p = decay.optimal_tau1(tau2=tau2_est)
         V_4p = decay(tau1_4p,tau2_est,SNR=True)
+        print('from AutoDEER:', 'tau1:', tau1_4p, 'tau2:', tau2_4p)
 
         # Use refocused 2D data for 4pDEER
     elif "Tm" in relaxation_data.keys():
@@ -1158,7 +1159,8 @@ def calc_DEER_settings(relaxation_data,mode='auto', target_time=2,
             deer_settings['dt'] = 16
         else:
             deer_settings['dt'] = 8
-
+    
+    print('final deer settings:', deer_settings)
 
     return deer_settings
     
